@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block banner %}
-    {% ifequal all_articles.number 1 %}
+    {% if all_articles.number == 1 %}
     <div id="page" class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
     <div class="carousel-item red white-text bg-cover about-cover">
         <div class="container">
@@ -26,11 +26,11 @@
         <div class="bg-cover pd-header about-cover">
             {% include 'banner.html' %}
         </div>
-    {% endifequal %}
+    {% endif %}
 {% endblock %}
 
 {% block contents %}
-    {% ifequal all_articles.number 1 %}
+    {% if all_articles.number == 1 %}
     <div id="indexCard" class="index-card">
     <div class="container ">
         <div class="card">
@@ -78,7 +78,7 @@
         </div>
     </div>
     </div>
-    {% endifequal %}
+    {% endif %}
 
     <main class="content" class="col s12 m12 l9">
     <article id="articles" class="container articles">
@@ -128,7 +128,7 @@
         <div class="row">
             <div class="col s6 m4 l4">
                 {% if all_articles.has_previous %}
-                <a href="?{{ all_articles.previous_page_number.querystring }}" class="left btn-floating btn-large waves-effect waves-light left-color">
+                    <a href="?{{ all_articles.previous_page_number.querystring }}" class="left btn-floating btn-large waves-effect waves-light left-color"></a>
                     {% else %}
                 <a class="left btn-floating btn-large disabled">
                 {% endif %}
@@ -138,12 +138,12 @@
 
 
             <div class="page-info col m4 l4 hide-on-small-only">
-                <div class="center-align b-text-gray">{{ all_articles.number }} / {{ all_articles.pages | last }}</div>
+                <div class="center-align b-text-gray">{{ all_articles.number }} / {{ total_pages }}</div>
             </div>
 
             <div class="col s6 m4 l4">
                 {% if all_articles.has_next %}
-                <a href="?{{ all_articles.next_page_number.querystring }}" class="right btn-floating btn-large waves-effect waves-light right-color">
+                    <a href="?{{ all_articles.next_page_number.querystring }}" class="right btn-floating btn-large waves-effect waves-light right-color"></a>
                 {% else%}
                 <a class="right btn-floating btn-large disabled">
                 {% endif %}

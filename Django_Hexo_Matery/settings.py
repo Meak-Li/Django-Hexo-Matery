@@ -21,7 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
+    'apps.blog',
     'mdeditor',
     'pure_pagination',
 ]
@@ -51,7 +51,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'blog.views.global_setting',
+                'apps.blog.views.global_setting',
             ],
         },
     },
@@ -59,14 +59,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Django_Hexo_Matery.wsgi.application'
 
-# 数据库配置
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django-blog',
-        'USER': 'root',
-        'PASSWORD': 'P@ssw0rd',
-        'HOST': '127.0.0.1'
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'Blog',
+        'USER': 'postgres',
+        'PASSWORD': '2021.ltr',
+        'HOST': "localhost",
+        'PORT': 5432
     }
 }
 
@@ -156,6 +156,8 @@ SIMPLEUI_ANALYSIS = False
 SIMPLEUI_STATIC_OFFLINE = True
 SIMPLEUI_LOADING = False
 SIMPLEUI_LOGO = 'https://image.3001.net/images/20191031/15724874583730.png'
-
+SIMPLEUI_HOME_PAGE = "/"
+SIMPLEUI_HOME_TITLE = '控制面板!'
+SIMPLEUI_HOME_ICON = 'fa fa-eye'
 # 后台MarkDown编辑器配置
 X_FRAME_OPTIONS = 'SAMEORIGIN'

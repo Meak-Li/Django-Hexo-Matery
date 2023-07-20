@@ -66,7 +66,7 @@
                 {% for i in categories %}
                 <a href="{% url 'article_category' i.id %}" title="{{ i.name }}: {{ i.article_set.all | length }}">
                     <span class="chip center-align waves-effect waves-light
-                             {% ifequal pk i.id %}chip-active{% else %}chip-default{% endifequal %} category-{% random_num %}">{{ i.name }}
+                             {% if pk == i.id %}chip-active{% else %}chip-default{% endif %} category-{% random_num %}">{{ i.name }}
                         <span class="tag-length">{{ i.article_set.all | length }}</span>
                     </span>
                 </a>
@@ -144,7 +144,7 @@
 
 
             <div class="page-info col m4 l4 hide-on-small-only">
-                <div class="center-align b-text-gray">{{ articles.number }} / {{ articles.pages | last }}</div>
+                <div class="center-align b-text-gray">{{ articles.number }} / {{ top_articles }}</div>
             </div>
 
             <div class="col s6 m4 l4">

@@ -44,9 +44,11 @@ class Index(View):
 
         p = Paginator(all_articles, 9, request=request)
         articles = p.page(page)
+        total_pages = p.num_pages
 
         return render(request, 'index.html', {
             'all_articles': articles,
+            'total_pages': total_pages,
             'top_articles': top_articles,
         })
 
@@ -76,7 +78,7 @@ class Detail(View):
 
         return render(request, 'detail.html', {
             'article': article,
-            'detail_html': output,
+            'detail_html': article.content,
         })
 
 
@@ -87,7 +89,7 @@ class Archive(View):
     def get(self, request):
         all_articles = Article.objects.all().order_by('-add_time')
         all_date = all_articles.values('add_time')
-        latest_date = all_date[0]['add_time']
+        latest_date = all_date[0]['add_time'] if all_date else datetime.datetime.now()
         all_date_list = []
         for i in all_date:
             all_date_list.append(i['add_time'].strftime("%Y-%m-%d"))
@@ -120,12 +122,14 @@ class Archive(View):
 
         p = Paginator(all_articles, 10, request=request)
         articles = p.page(page)
+        top_articles = p.num_pages
 
         return render(request, 'archive.html', {
             'all_articles': articles,
             'date_list': date_list,
             'end': str(end),
             'begin': str(begin),
+            'top_articles': top_articles,
         })
 
 
@@ -150,11 +154,13 @@ class CategoryView(View):
 
         p = Paginator(articles, 9, request=request)
         articles = p.page(page)
+        top_articles = p.num_pages
 
         return render(request, 'article_category.html', {
             'categories': categories,
             'pk': int(pk),
-            'articles': articles
+            'articles': articles,
+            'top_articles': top_articles
         })
 
 
@@ -178,11 +184,13 @@ class TagView(View):
 
         p = Paginator(articles, 9, request=request)
         articles = p.page(page)
+        top_articles = p.num_pages
 
         return render(request, 'article_tag.html', {
             'tags': tags,
             'pk': int(pk),
             'articles': articles,
+            'top_articles': top_articles
         })
 
 
@@ -194,7 +202,7 @@ class About(View):
 
         all_date = articles.values('add_time')
 
-        latest_date = all_date[0]['add_time']
+        latest_date = all_date[0]['add_time'] if all_date else datetime.datetime.now()
         end_year = latest_date.strftime("%Y")
         end_month = latest_date.strftime("%m")
         date_list = []

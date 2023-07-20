@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.views import static
 
-from blog.views import Index, Friends, Detail, Archive, CategoryList, CategoryView, TagList, TagView, About
+from apps.blog.views import Index, Friends, Detail, Archive, CategoryList, CategoryView, TagList, TagView, About
 
 urlpatterns = [
     path('admin/', admin.site.urls),

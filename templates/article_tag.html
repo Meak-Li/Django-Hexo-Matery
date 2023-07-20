@@ -66,7 +66,7 @@
                 {% for tag in tags %}
                 <a href="{% url 'article_tag' tag.id %}" title="{{ tag.name }}: {{ tag.article_set.all | length }}">
                     <span class="chip center-align waves-effect waves-light
-                             {% ifequal pk tag.id %}chip-active{% else %}chip-default{% endifequal %} tag-{% random_num %}" data-tagname="{{ tag.name }}">{{ tag.name }}
+                             {% if pk == tag.id %}chip-active{% else %}chip-default{% endif %} tag-{% random_num %}" data-tagname="{{ tag.name }}">{{ tag.name }}
                         <span class="tag-length">{{ tag.article_set.all | length }}</span>
                     </span>
                 </a>
@@ -144,7 +144,7 @@
 
 
             <div class="page-info col m4 l4 hide-on-small-only">
-                <div class="center-align b-text-gray">{{ articles.number }} / {{ articles.pages | last }}</div>
+                <div class="center-align b-text-gray">{{ articles.number }} / {{ top_articles }}</div>
             </div>
 
             <div class="col s6 m4 l4">
