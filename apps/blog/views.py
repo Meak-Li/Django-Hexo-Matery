@@ -74,11 +74,11 @@ class Detail(View):
         article = Article.objects.get(id=int(pk))
         article.viewed()
         mk = mistune.Markdown()
-        output = mk(article.content)
+        output = mistune.html(article.content)
 
         return render(request, 'detail.html', {
             'article': article,
-            'detail_html': article.content,
+            'detail_html': output,
         })
 
 
